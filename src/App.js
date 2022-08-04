@@ -1,67 +1,71 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import cb from './images/coldbrew.jpg';
-import cortado from './images/cortado.jpg';
-import latte from './images/latte.jpg';
-import pourover from './images/pourover.jpg';
+import { useEffect, useState } from "react";
+import "./App.css";
+import cb from "./images/coldbrew.jpg";
+import cortado from "./images/cortado.jpg";
+import latte from "./images/latte.jpg";
+import pourover from "./images/pourover.jpg";
 
 const IMAGES = [
   {
     src: cb,
-    alt: 'cold brew'
+    alt: "cold brew",
+    value: "Cold brew",
   },
   {
     src: cortado,
-    alt: 'cortado'
+    alt: "cortado",
+    value: "Cortado",
   },
   {
     src: latte,
-    alt: 'latte'
+    alt: "latte",
+    value: "Latte",
   },
   {
     src: pourover,
-    alt: 'pourover'
+    alt: "pourover",
+    value: "Pourover",
   },
-]
+];
 function App() {
   const [items, setItems] = useState([]);
+  useEffect(() => {
+    window.analytics.load("599wYBjmBZCrCis7Xap4PR2R6KVIQrOv");
+  }, []);
 
   useEffect(() => {
-    window.analytics.page('Order');
-  }, [])
+    window.analytics.page("Order");
+  }, []);
 
   const addItem = (opt) => {
-    setItems([...items, opt])
-    window.analytics.track('Product added', {
-      product: opt
+    setItems([...items, opt]);
+    window.analytics.track("Product added", {
+      product: opt,
     });
-  }
+  };
 
   const proceed = () => {
-    window.analytics.track('Checkout clicked', {
-      products: items
+    console.log({ items });
+    window.analytics.track("Checkout clicked", {
+      products: items,
     });
-  }
+  };
 
-  const renderImage = ({alt, src}) => {
+  const renderImage = ({ alt, src, value }) => {
     return (
-      <div className="img" onClick={addItem}>
-        <img src={src} alt={alt} style={{height: '300px', width:'300px'}}/>
-        <p>{alt}</p>
+      <div className="img" onClick={() => addItem(value)} key={src}>
+        <img src={src} alt={alt} style={{ height: "300px", width: "300px" }} />
+        <p>{value}</p>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="App">
       <div className="main">
         <h1>Order</h1>
-        <div className="images">
-          {IMAGES.map((renderImage))}
-        </div>
-        {items.length > 0 && (
-          <button onClick={proceed}>Proceed</button>
-        )}
+        <div className="images">{IMAGES.map(renderImage)}</div>
+        {items.length > 0 && <button onClick={proceed}>Proceed</button>}
       </div>
     </div>
   );
