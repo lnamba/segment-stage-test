@@ -29,8 +29,9 @@ const IMAGES = [
 ];
 function App() {
   const [items, setItems] = useState([]);
+  console.log(window.analytics);
   useEffect(() => {
-    window.analytics.load("599wYBjmBZCrCis7Xap4PR2R6KVIQrOv");
+    window.analytics.load("dJ4Q7khrMuccRJy5bUQnN9DvkJczut6E");
   }, []);
 
   useEffect(() => {
