@@ -31,7 +31,7 @@ function App() {
   const [items, setItems] = useState([]);
   console.log(window.analytics);
   useEffect(() => {
-    window.analytics.load("dJ4Q7khrMuccRJy5bUQnN9DvkJczut6E");
+    console.log("TRacked");
   }, []);
 
   useEffect(() => {
@@ -40,6 +40,10 @@ function App() {
 
   const addItem = (opt) => {
     setItems([...items, opt]);
+    window.analytics.identify("12345", {
+      email: "test@test.com",
+      name: "Test",
+    });
     window.analytics.track("Product added", {
       product: opt,
     });
@@ -47,6 +51,10 @@ function App() {
 
   const proceed = () => {
     console.log({ items });
+    window.analytics.identify("12345", {
+      email: "test@test.com",
+      name: "Test",
+    });
     window.analytics.track("Checkout clicked", {
       products: items,
     });
