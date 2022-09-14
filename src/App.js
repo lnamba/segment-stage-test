@@ -58,6 +58,7 @@ function App() {
     window.analytics.track("Checkout clicked", {
       products: items,
     });
+    alert("Thanks");
   };
 
   const renderImage = ({ alt, src, value }) => {
