@@ -59,6 +59,7 @@ function App() {
       products: items,
     });
     alert("Thanks");
+    setItems([]);
   };
 
   const renderImage = ({ alt, src, value }) => {
